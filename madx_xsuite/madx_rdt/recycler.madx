@@ -1,0 +1,19 @@
+!beam,    sequence=RING605_FODO, particle="proton",energy= 8.88459;
+E0 :=8.88459;
+beam, particle=proton,energy= E0;
+
+call, file="markers.def";
+call, file="multipoles_madx.def";
+call, file="madx_types.def";
+call, file="values.dat";
+call, file="madx.seq";
+
+use, sequence=RING605_FODO;
+!from mad8 survey
+!               arc
+!3319.398039  3319.418803
+select, flag=twiss, clear;
+set,    format="12.6f";
+select,  flag=twiss, column=name,s,betx,alfx,mux,dx,bety,alfy,muy,dy,keyword;
+twiss,chrom,sequence=RING605_FODO,file="twiss.tfs";
+stop;
